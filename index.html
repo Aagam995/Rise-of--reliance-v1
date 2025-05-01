@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise of Reliance Industries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0056b3;
+      --secondary: #00a0e1;
+      --accent: #ff6b00;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --text: #495057;
+      --timeline: #00a0e1;
+      --card-bg: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    
+    /* Header Styles */
+    .timeline-header {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+    
+    .timeline-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), #ffcc00);
+    }
+    
+    .timeline-header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .timeline-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    
+    /* Floating Particles */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: float-particle 15s infinite linear;
+    }
+    
+    @keyframes float-particle {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    /* Timeline Container */
+    .timeline-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+    
+    /* Timeline Line */
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--timeline);
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+    
+    /* Timeline Items */
+    .timeline-items {
+      position: relative;
+      padding-bottom: 5rem;
+      z-index: 2;
+    }
+    
+    .timeline-item {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 4rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .timeline-item:nth-child(even) {
+      justify-content: flex-end;
+    }
+    
+    .timeline-card {
+      width: calc(50% - 60px);
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .timeline-item:nth-child(even) .timeline-card {
+      border-left: none;
+      border-right: 4px solid var(--accent);
+    }
+    
+    .timeline-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+    
+    .year-marker {
+      position: absolute;
+      top: 20px;
+      width: 100px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,86,179,0.3);
+      z-index: 3;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item:nth-child(odd) .year-marker {
+      left: calc(50% - 60px);
+      transform: translateX(0);
+    }
+    
+    .timeline-item:nth-child(even) .year-marker {
+      left: calc(50% + 60px);
+      transform: translateX(0);
+    }
+    
+    .timeline-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .timeline-content p {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    
+    .timeline-icon {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border: 3px solid var(--timeline);
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-icon {
+      left: calc(50% - 30px);
+    }
+    
+    .timeline-item:nth-child(even) .timeline-icon {
+      left: calc(50% + 30px);
+    }
+    
+    /* Brand Showcase Section */
+    .brands-section {
+      background: white;
+      padding: 5rem 2rem;
+      margin-top: 3rem;
+    }
+    
+    .brands-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--primary);
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      margin: 0.5rem auto 0;
+    }
+    
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .brand-card {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid var(--primary);
+    }
+    
+    .brand-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .brand-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .brand-card p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    
+    .brand-sector {
+      display: inline-block;
+      background: rgba(0,160,225,0.1);
+      color: var(--secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    /* Footer */
+    .timeline-footer {
+      text-align: center;
+      padding: 3rem;
+      background: var(--dark);
+      color: white;
+    }
+    
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .footer-quote {
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0.8;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .social-links a {
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .timeline-line {
+        left: 60px;
+      }
+      
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+      }
+      
+      .timeline-card {
+        width: calc(100% - 100px);
+        margin-left: 80px;
+      }
+      
+      .year-marker,
+      .timeline-item:nth-child(odd) .year-marker,
+      .timeline-item:nth-child(even) .year-marker {
+        left: 0;
+        transform: translateX(0);
+      }
+      
+      .timeline-icon,
+      .timeline-item:nth-child(odd) .timeline-icon,
+      .timeline-item:nth-child(even) .timeline-icon {
+        left: 30px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .timeline-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .brands-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="timeline-header">
+    <div class="particles" id="particles"></div>
+    <h1>Rise of Reliance Industries</h1>
+    <p>From a small yarn trading business to a global conglomerate - The remarkable journey of India's most valuable company</p>
+  </header>
+  
+  <!-- Timeline Section -->
+  <div class="timeline-container">
+    <div class="timeline-line"></div>
+    
+    <div class="timeline-items">
+      <!-- 1957 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">1957</div>
+          <div class="timeline-icon"><i class="fas fa-business-time"></i></div>
+          <div class="timeline-content">
+            <h3>The Humble Beginnings</h3>
+            <p>Dhirubhai H Ambani was a son of a school teacher from Junagadh, Gujarat. After his schooling he went to Aden, UK and returned in 1957 and started his yarn trading business named Majin in Mumbai majorly into importing yarn and exporting spices to Yemen.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 1977 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">1977</div>
+          <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="timeline-content">
+            <h3>The Historic IPO</h3>
+            <p>Reliance Textile Industries' IPO created history by ushering the equity cult in India. The issue was oversubscribed seven times, strengthening Reliance's growth ambitions. The IPO, which issued 2.8 million shares, was credited with engaging small investors in the stock market.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 1985 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">1985</div>
+          <div class="timeline-icon"><i class="fas fa-industry"></i></div>
+          <div class="timeline-content">
+            <h3>Diversification Begins</h3>
+            <p>With investors eager to own shares, Reliance expanded rapidly into sectors adjacent to its textile business, and in 1985 it became known as Reliance Industries Limited. After gaining the capacity to manufacture petrochemicals useful for synthetic textiles, it later began manufacturing plastics and, eventually, refining petroleum.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 1991 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">1991</div>
+          <div class="timeline-icon"><i class="fas fa-hard-hat"></i></div>
+          <div class="timeline-content">
+            <h3>Hazira Complex</h3>
+            <p>In 1991 Reliance opened a massive industrial complex in Hazira, Gujarat state, propelling the corporation to the forefront of production in the global polyester market.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 1996 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">1996</div>
+          <div class="timeline-icon"><i class="fas fa-oil-can"></i></div>
+          <div class="timeline-content">
+            <h3>Entering Oil Refining</h3>
+            <p>Reliance entered the refining business with the setting up of a world-class refinery in Jamnagar. This marked a significant shift from textiles and petrochemicals into oil refining, which would become a major pillar of its business.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 1998 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">1998</div>
+          <div class="timeline-icon"><i class="fas fa-award"></i></div>
+          <div class="timeline-content">
+            <h3>International Recognition</h3>
+            <p>15 June 1998 – Dhirubhai Ambani received the Dean's Medal by The Wharton School, University of Pennsylvania for setting an outstanding example of leadership. Dhirubhai Ambani was the first Indian to receive the Dean's Medal.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2002 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">2002</div>
+          <div class="timeline-icon"><i class="fas fa-exchange-alt"></i></div>
+          <div class="timeline-content">
+            <h3>Leadership Transition</h3>
+            <p>After Dhirubhai's death in 2002, his sons Mukesh and Anil assumed joint leadership of the Reliance companies. However, the brothers' feuding over control prompted their mother, Kokilaben, to split Reliance's assets via a noncompetition agreement.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2004 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">2004</div>
+          <div class="timeline-icon"><i class="fas fa-globe"></i></div>
+          <div class="timeline-content">
+            <h3>Global Recognition</h3>
+            <p>Reliance emerges as the first and only private Indian organisation to be listed in the Fortune Global 500 ® list under the leadership of Mukesh D. Ambani as Chairman and Managing Director of Reliance Industries Limited.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2006 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">2006</div>
+          <div class="timeline-icon"><i class="fas fa-shopping-bag"></i></div>
+          <div class="timeline-content">
+            <h3>Retail Revolution</h3>
+            <p>Reliance enters the retail business with Reliance Retail and quickly becomes the largest retailer by revenue in just eight years.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2007 -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">2007</div>
+          <div class="timeline-icon"><i class="fas fa-tv"></i></div>
+          <div class="timeline-content">
+            <h3>Media Expansion</h3>
+            <p>Reliance entered the media and entertainment sector by acquiring stakes in TV and media companies, making its presence felt in the growing Indian media space.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2010s -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">2010s</div>
+          <div class="timeline-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="timeline-content">
+            <h3>Digital Disruption</h3>
+            <p>The company's growth continued, with investments in energy, petrochemicals, telecommunications, and retail. In 2016, Reliance launched Jio, a disruptive telecommunications company that revolutionized India's mobile internet market with affordable data plans and widespread 4G services.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 2020s -->
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="year-marker">2020s</div>
+          <div class="timeline-icon"><i class="fas fa-leaf"></i></div>
+          <div class="timeline-content">
+            <h3>Green Energy Pivot</h3>
+            <p>Reliance made major moves toward sustainability and green energy. Chairman Mukesh Ambani announced plans to shift Reliance's focus toward renewable energy, aiming to build one of the world's largest green energy ecosystems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Brands Showcase Section -->
+  <section class="brands-section">
+    <div class="brands-container">
+      <h2 class="section-title">Reliance's Diverse Portfolio</h2>
+      <div class="brands-grid">
+        <!-- Jio -->
+        <div class="brand-card">
+          <h3>Reliance Jio</h3>
+          <span class="brand-sector">Telecommunications</span>
+          <p>Revolutionized India's digital landscape with affordable 4G services and now expanding into 5G.</p>
+        </div>
+        
+        <!-- Retail -->
+        <div class="brand-card">
+          <h3>Reliance Retail</h3>
+          <span class="brand-sector">Retail</span>
+          <p>India's largest retailer operating various formats including Reliance Fresh, Trends, and Digital.</p>
+        </div>
+        
+        <!-- JioMart -->
+        <div class="brand-card">
+          <h3>JioMart</h3>
+          <span class="brand-sector">E-commerce</span>
+          <p>Digital marketplace combining Reliance Retail's physical infrastructure with Jio's digital reach.</p>
+        </div>
+        
+        <!-- Petroleum -->
+        <div class="brand-card">
+          <h3>Reliance Petroleum</h3>
+          <span class="brand-sector">Energy</span>
+          <p>Operates the world's largest refining complex at Jamnagar with advanced petrochemical facilities.</p>
+        </div>
+        
+        <!-- Solar -->
+        <div class="brand-card">
+          <h3>Reliance Solar</h3>
+          <span class="brand-sector">Renewable Energy</span>
+          <p>Leading India's transition to green energy with solar, battery, and hydrogen technologies.</p>
+        </div>
+        
+        <!-- Jio Platforms -->
+        <div class="brand-card">
+          <h3>Jio Platforms</h3>
+          <span class="brand-sector">Digital Services</span>
+          <p>Umbrella for digital services including JioSaavn, JioCinema, and other digital ventures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="timeline-footer">
+    <div class="footer-logo">Reliance Industries</div>
+    <p class="footer-quote">"Think big, think fast, think ahead. Ideas are no one's monopoly." - Dhirubhai Ambani</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+  
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random size between 5px and 15px
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random position
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Random animation duration
+        const duration = Math.random() * 20 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        
+        // Random delay
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Animate timeline items on scroll
+    function animateOnScroll() {
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      timelineItems.forEach(item => {
+        observer.observe(item);
+      });
+    }
+    
+    // Initialize everything when DOM loads
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      animateOnScroll();
+    });
+  </script>
+</body>
+</html>
